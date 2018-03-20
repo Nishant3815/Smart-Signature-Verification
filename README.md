@@ -25,5 +25,9 @@ Our idea is to extract the previously stored signature from the system using the
 **FRAMEWORK**
 ![alt text](./Framework1.jpg, "Complete Web-App Flow")
 
+**How to Run a Sample Test Case**
+1.	Open the webpage at link:  https://lit-waters-92367.herokuapp.com/
+2.  Click on the “Update Mandate” button and choose a file. The file is nothing but a scanned as well as filled “Mandate Form” in the Test_Cases_Documents
+3.
 
 
