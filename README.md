@@ -21,6 +21,7 @@ Signature verification is essential in preventing falsification of documents in 
 Our idea is to extract the previously stored signature from the system using the concept of image segmentation using OpenCV and Tesseract and then apply deep learning model that we have developed and classify if the signature under scrutiny is right and matching or falsified. In the signature classification model, pre-processing of the dataset is very important wherein have done the noise removal and property adjustment part(angular rotation, resizing and exact position detection). In the signature classification model we would be using Convolutional Neural Networks and Transfer Learning techniques. Our final task will be to ensure that the model that we have developed is scalable and can be used across all the places of interests easily and can be used by even the common people without knowing indepth about the system.
 
 **FRAMEWORK**
+![alt text](Framework1.png "Complete Web-App Flow")
 
 
 
