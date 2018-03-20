@@ -1,0 +1,124 @@
+{% load staticfiles %}
+
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="{% static 'style1.css' %}">
+	
+	<title> SIGNATURE VERIFICATION </title>
+
+<!-- CSS Code---------------->
+	<style>
+	body{font-size: 200.5%}
+	#output_image{max-width:300px;}
+		
+	html {display:table; width:100%;}
+	body {display:table-cell; text-align:center; vertical-align:middle;}
+	
+	.zoom:hover {
+    -ms-transform: scale(1.5); /* IE 9 */
+    -webkit-transform: scale(1.5); /* Safari 3-8 */
+    transform: scale(3.5); 
+}
+	</style>
+<!--------------------------->
+</head>
+
+
+<body>
+
+	  <form id="post-form" method="post" enctype="multipart/form-data" >
+	  {% csrf_token %}
+	  Account Number: <br><input type="text" name="accountNumber" id="id_accountNumber" value="HARSH"><br>
+	  First Signature:  <input type="file" name="signature1" id="signatureFirst" accept=".jpg,.jpeg,.png" onchange="document.getElementById('output_image_Signature').src = window.URL.createObjectURL(this.files[0]); testit(event)"><br>
+	  Second Signature: <input type="file" name="signature2" id="signatureSecond" accept=".jpg,.jpeg,.png" onchange="document.getElementById('output_image_Signature_2').src = window.URL.createObjectURL(this.files[0]); testit(event)"><br>
+	  <input type="submit" value="Submit"> 
+	  </form>
+  
+	  <br>
+	  Signature 1:<br>	<img class="zoom" id="output_image_Signature" alt="" width="250" height="100"/>	<br>
+	  Signature 2:<br>	<img class="zoom" id="output_image_Signature_2" width="250" height="100"/>  <br>
+	  
+	  <div>
+	  Probability:	
+		<div> <strong> <span id = "result"></span> </strong> </div>
+		<div id='loadingmessage' style='display:none'>
+		<img src={% static 'loading.gif' %}/>
+		</div>
+	  </div>
+	
+		
+	<canvas width="300" height="300" id="mycanvas" style="display: none;"></canvas>
+	
+	
+	
+	
+	
+	
+
+
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script>
+			
+			
+			var images = [];
+
+			function testit(event) {
+					var myCanvas = document.getElementById('mycanvas');
+					var myImageUrl = URL.createObjectURL(event.target.files[0]);
+					var ctx = myCanvas.getContext('2d');
+					var img = new Image
+					img.src = myImageUrl
+					img.onload = function(){
+					myCanvas.width = img.width;
+					myCanvas.height = img.height;
+					ctx.drawImage(img, 0, 0);
+					images.push(myCanvas.toDataURL('image/jpeg'));
+					};}
+			
+			var form = $('#post-form');
+			form.submit(function () {
+			
+						$('#result').replaceWith('<span id = "result"></span>');
+						
+						if( document.getElementById("signatureFirst").files.length == 0 ){
+							alert("Please upload the image");
+								}	
+						else{
+							accountNumber = document.getElementById('id_accountNumber').value;
+							$('#loadingmessage').show();				
+							$.ajax({
+								
+								type: form.attr('method'),
+								url: "/test/",
+								data: { 'accountNumber': accountNumber,
+										'image1': images[0],
+										'image2': images[1],	
+										'csrfmiddlewaretoken': '{{ csrf_token }}'
+										},
+										
+										
+								
+								success: function (data) {
+										$('#result').replaceWith('<span id = "result">'+ data.is_taken + '</span>');
+										$('#loadingmessage').hide();
+									},
+								error: function(data) {
+										$('#result').replaceWith('<span id = "result">'+ "Something went wrong" + '</span>');
+										$('#loadingmessage').hide();
+									}
+								});
+							return false;
+						}});
+	
+	
+	
+	
+</script>
+
+</body>
+</html>
