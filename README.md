@@ -15,6 +15,9 @@ Link to the deployed App on *Heroku Platform* : https://lit-waters-92367.herokua
 10. Ajax : Make Request to Web-Server
 11. SQLite3 : Database Management System
 
+**How to Use this Github ? **
+*mysite* folder is the main folder. The Web-App is based on Django framework. MNIST weights and SIGNET weights are the weights of the saved model. Inner *mysite* folder contains Django App settings and Sig_verify contains views, models, database and other important files required for app functioning. *mysite/Templates/sig_verify* contains all the front-end codes of our present Web-App.
+
 **IDEA**
 Current methods in machine learning and statistics have allowed for the reliable automation of many of these tasks (face verification, fingerprinting, iris recognition). Among the numerous tasks used for biometric authentication is signature verification, which aims to detect whether a given signature is genuine or forged.
 
