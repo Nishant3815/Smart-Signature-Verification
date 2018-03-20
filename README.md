@@ -25,7 +25,7 @@ Our idea is to extract the previously stored signature from the system using the
 10. Ajax : Make Request to Web-Server
 11. SQLite3 : Database Management System
 
-**How to Use this Github ?**
+**About this Repository**
 
 *mysite* folder is the main folder. The Web-App is based on Django framework. MNIST weights and SIGNET weights are the weights of the saved model. Inner *mysite* folder contains Django App settings and Sig_verify contains views, models, database and other important files required for app functioning. *mysite/Templates/sig_verify* contains all the front-end codes of our present Web-App. Test_Case_Document folder contains sample test case forms
 
